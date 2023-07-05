@@ -1,2 +1,5 @@
-package ru.skypro.lessons.springboot.spring_web_lessons.Service;public interface CounterService {
+package ru.skypro.lessons.springboot.spring_web_lessons.service;
+
+public interface CounterService {
+    public Integer showCounter();
 }
