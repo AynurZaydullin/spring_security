@@ -4,15 +4,15 @@ package ru.skypro.lessons.springboot.spring_web_lessons.dto;
 public class ReportDTO {
     private String department;
 
-    private int totalEmployees;
+    private long totalEmployees;
 
     private int maxSalary;
 
     private int minSalary;
 
-    private int averageSalary;
+    private double averageSalary;
 
-    public ReportDTO(String department, int totalEmployees, int maxSalary, int minSalary, int averageSalary) {
+    public ReportDTO(String department, long totalEmployees, int maxSalary, int minSalary, double averageSalary) {
         this.department = department;
         this.totalEmployees = totalEmployees;
         this.maxSalary = maxSalary;
@@ -28,7 +28,7 @@ public class ReportDTO {
         this.department = department;
     }
 
-    public int getTotalEmployees() {
+    public long getTotalEmployees() {
         return totalEmployees;
     }
 
@@ -52,7 +52,7 @@ public class ReportDTO {
         this.minSalary = minSalary;
     }
 
-    public int getAverageSalary() {
+    public double getAverageSalary() {
         return averageSalary;
     }
 

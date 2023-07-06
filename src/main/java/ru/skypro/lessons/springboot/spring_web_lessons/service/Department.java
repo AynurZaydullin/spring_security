@@ -6,11 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "position")
+@Table(name = "department")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Position {
+public class Department {
 
     // Идентификатор должности, генерируется автоматически
     @Id

@@ -17,7 +17,7 @@ public class EmployeeDTO {
     private Long id;
     private String name;
     private Integer salary;
-    private String position;
+    private String department;
 
     public EmployeeDTO(Long id, String name, Integer salary) {
         this.id = id;

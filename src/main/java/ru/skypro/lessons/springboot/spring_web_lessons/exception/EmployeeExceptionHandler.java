@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 public class EmployeeExceptionHandler {
-    @ExceptionHandler(EmployeeNotFoundException.class)
+    @ExceptionHandler({EmployeeNotFoundException.class, ReportNotFoundException.class})
     public ResponseEntity<?> notFound() {
         return ResponseEntity.notFound().build();
     }

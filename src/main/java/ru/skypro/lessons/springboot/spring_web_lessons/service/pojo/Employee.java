@@ -1,7 +1,7 @@
 package ru.skypro.lessons.springboot.spring_web_lessons.service.pojo;
 
 import jakarta.persistence.*;
-import ru.skypro.lessons.springboot.spring_web_lessons.service.Position;
+import ru.skypro.lessons.springboot.spring_web_lessons.service.Department;
 
 @Entity
 @Table(name = "employee")
@@ -10,20 +10,18 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String department;
 
     private String name;
     private int salary;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "position_id")
-    private Position position;
+    @JoinColumn(name = "department_id")
+    private Department department;
     public Employee() {
     }
 
-    public Employee(Long id, String department, String name, int salary) {
+    public Employee(Long id, String name, int salary) {
         this.id = id;
-        this.department = department;
         this.name = name;
         this.salary = salary;
     }

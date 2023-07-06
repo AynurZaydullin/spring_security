@@ -3,16 +3,20 @@ package ru.skypro.lessons.springboot.spring_web_lessons.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import ru.skypro.lessons.springboot.spring_web_lessons.dto.EmployeeDTO;
 import ru.skypro.lessons.springboot.spring_web_lessons.exception.IllegalJsonFileException;
+import ru.skypro.lessons.springboot.spring_web_lessons.exception.ReportNotFoundException;
 import ru.skypro.lessons.springboot.spring_web_lessons.repository.EmployeeRepository;
 import ru.skypro.lessons.springboot.spring_web_lessons.repository.ReportRepository;
 import ru.skypro.lessons.springboot.spring_web_lessons.dto.ReportDTO;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Service
@@ -32,7 +36,7 @@ public class EmployeeService {
                 .map(EmployeeDTO::toEmployee)
                 .forEach(employeeRepository::save);
     }
-        public String buildReport() throws JsonProcessingException {
+    public String buildReport() throws JsonProcessingException {
         List<ReportDTO> reports = employeeRepository.buildReports();
         return objectMapper.writeValueAsString(reports);
     }
@@ -57,10 +61,24 @@ public class EmployeeService {
         }
     }
 
-    public void report() {
-        Report report = new Report();
-        report.setReport(buildReport());
-        reportRepository.save(report);
+    public long report() {
+        try {
+            Report report = new Report();
+            report.setReport(buildReport());
+            return reportRepository.save(report).getId();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    public Resource downloadReport(int id) {
+        return new ByteArrayResource(
+                reportRepository.findById(id)
+                        .orElseThrow(ReportNotFoundException::new)
+                        .getReport()
+                        .getBytes(StandardCharsets.UTF_8)
+        );
     }
 //    private final EmployeeMapper employeeMapper;
 //    private final ObjectMapper objectMapper;
