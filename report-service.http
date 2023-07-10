@@ -1,0 +1,6 @@
+### файл http запросов по отчетам
+### Создание отчёта
+POST http://localhost:8080/employees/report/createReport
+
+### Получение отчёта по id
+GET http://localhost:8080/employees/report/4
