@@ -12,5 +12,7 @@ import java.util.List;
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     @Query("SELECT new ru.skypro.lessons.springboot.spring_web_lessons.dto.ReportDTO(e.department.name, count(e.id), max(e.salary), min(e.salary), avg(e.salary)) FROM Employee e GROUP BY e.department.name")
     List<ReportDTO> buildReports();
-//    List<Employee> getAllEmployees();
+    @Query(value = "SELECT * FROM employee",
+            nativeQuery = true)
+    List<Employee> getAllEmployees();
 }

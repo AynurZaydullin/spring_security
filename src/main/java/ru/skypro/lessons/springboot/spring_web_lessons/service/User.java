@@ -1,13 +1,19 @@
-//package ru.skypro.lessons.springboot.spring_web_lessons.dto;
+//package ru.skypro.lessons.springboot.spring_web_lessons.service;
 //
-//import ru.skypro.lessons.springboot.spring_web_lessons.service.Role;
+//import jakarta.persistence.*;
 //
-//public class UserDTO {
+//@Entity
+//@Table(name = "'user'")
+//public class User {
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 //
+//    @Column(nullable = false, unique = true)
 //    private String login;
 //    private String password;
-//    private Role role;
+////    @Enumerated(EnumType.STRING)
+////    private Role role;
 //
 //    public Long getId() {
 //        return id;

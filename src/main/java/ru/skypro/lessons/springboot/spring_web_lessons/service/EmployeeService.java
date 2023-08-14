@@ -136,10 +136,10 @@ public class EmployeeService {
 //        // Иначе выбрасываем исключение с указанием некорректного id
 //        return employeeOptional.orElseThrow(() -> new IncorrectEmployeeIdException(id));
 //    }
-//    @Override
-//    public List<Employee> getAllEmployees() {
-//        return employeeRepository.getAllEmployees();
-//    }
+
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.getAllEmployees();
+    }
 //
 //    @Override
 //    public Employee getEmployeeById(int name) {

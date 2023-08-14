@@ -23,10 +23,10 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-//    @GetMapping("/employees")
-//    public List<Employee> getAllEmployees() {
-//        return employeeService.getAllEmployees();
-//    }
+    @GetMapping("/employees")
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
+    }
 //
 //    @GetMapping
 //    public Employee getEmployeeById(@RequestParam("Name") int name) {
