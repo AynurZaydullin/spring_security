@@ -85,47 +85,10 @@ public class SecurityConfig {
 //// Создаем класс SecurityConfig, который конфигурирует
 //// настройки безопасности нашего приложения.
 //
-//    @Bean
-//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        http.csrf()
-//                .disable()
-//                .authorizeHttpRequests(this::customizeRequest);
-//        // Цепочка фильтров безопасности для обработки входящих запросов,
-//        // основанная на настройках безопасности,
-//        // определенных с помощью метода 'customizeRequest'.
-//
-//        return http.build();
-//    }
-//
-//    private void customizeRequest(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-//        try {
-//            registry.requestMatchers(new AntPathRequestMatcher("/admin/**"))
-//                    .hasAnyRole("ADMIN")
-//                    // Определяем правило авторизации для запросов
-//                    // к URL, которые начинаются с "/admin/",
-//                    // позволяя доступ только пользователям с ролью "ADMIN".
-//
-//                    .requestMatchers(new AntPathRequestMatcher("/**"))
-//                    .hasAnyRole("USER")
-//                    // Определяем правило авторизации для остальных запросов,
-//                    // позволяя доступ только пользователям с ролью "USER".
-//
-//                    .and()
-//                    .formLogin().permitAll()
-//                    // Позволяем всем пользователям доступ к форме входа.
-//
-//                    .and()
-//                    .logout().logoutUrl("/logout");
-//            // Настраиваем механизм выхода из системы
-//            // с заданием URL "/logout".
-//
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 
 
-//    @Autowired
+
+    @Autowired
     // Внедряем зависимость UserDetailsService
     // для работы с данными пользователя.
     private UserDetailsService userDetailsService;
@@ -146,5 +109,44 @@ public class SecurityConfig {
         // для возможности использовать его при аутентификации.
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf()
+                .disable()
+                .authorizeHttpRequests(this::customizeRequest);
+        // Цепочка фильтров безопасности для обработки входящих запросов,
+        // основанная на настройках безопасности,
+        // определенных с помощью метода 'customizeRequest'.
+
+        return http.build();
+    }
+
+    private void customizeRequest(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
+        try {
+            registry.requestMatchers(new AntPathRequestMatcher("/admin/**"))
+                    .hasAnyRole("ADMIN")
+                    // Определяем правило авторизации для запросов
+                    // к URL, которые начинаются с "/admin/",
+                    // позволяя доступ только пользователям с ролью "ADMIN".
+
+                    .requestMatchers(new AntPathRequestMatcher("/**"))
+                    .hasAnyRole("USER")
+                    // Определяем правило авторизации для остальных запросов,
+                    // позволяя доступ только пользователям с ролью "USER".
+
+                    .and()
+                    .formLogin().permitAll()
+                    // Позволяем всем пользователям доступ к форме входа.
+
+                    .and()
+                    .logout().logoutUrl("/logout");
+            // Настраиваем механизм выхода из системы
+            // с заданием URL "/logout".
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

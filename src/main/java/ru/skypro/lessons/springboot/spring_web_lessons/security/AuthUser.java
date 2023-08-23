@@ -20,7 +20,7 @@ public class AuthUser {
     private String password;
 
     private boolean isEnabled;
-    @JoinColumn(name = "user_id")
-    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "auth_user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Authority> authorityList;
 }

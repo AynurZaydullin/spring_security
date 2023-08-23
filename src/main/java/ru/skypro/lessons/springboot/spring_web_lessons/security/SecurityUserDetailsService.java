@@ -1,5 +1,6 @@
 package ru.skypro.lessons.springboot.spring_web_lessons.security;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,7 +12,7 @@ import ru.skypro.lessons.springboot.spring_web_lessons.security.AuthUser;
 import ru.skypro.lessons.springboot.spring_web_lessons.security.SecurityUserPrincipal;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class SecurityUserDetailsService implements UserDetailsService{
 
     private UserRepository userRepository;
